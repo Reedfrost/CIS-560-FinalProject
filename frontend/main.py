@@ -1,4 +1,4 @@
-#import tokenize
+import sys
 
 class assign:
     def display():
@@ -7,7 +7,9 @@ class assign:
         print("> offenders")
         print("> strike <student id> <strike id>")
         print("> fire <student id>")
+        print("> newStrike")
         print("> quit")
+        print(">(Not case sensitive)")
     def menu(id, query):
         command = None;
 
@@ -16,6 +18,7 @@ class assign:
             try:
                 assign.display()
                 command = input()
+                command = command.lower()
                 tokens = command.split()
                 if(tokens[0] == "offenders"):
                     print("\nSearching for Students with 3 Strikes...\n")
@@ -23,6 +26,13 @@ class assign:
                 elif(tokens[0] == "quit"):
                     print("\nGoodbye\n")
                     break
+                elif(tokens[0] == "newstrike"):
+                    print("\nEnter Name of the New Strike: \n")
+                    name = input()
+                    print("\nEnter description: \n")
+                    description = input()
+                    #TODO: Call function to create new Strike
+                    print("\nCreating Strike: " + name + "...\n")
                 elif(tokens[0] == "strike" and len(tokens) == 3):
                     print("\nGiving student with ID " + tokens[1] + " a new strike...\n")
                     #TODO: Call function to validate student ID
@@ -49,6 +59,7 @@ class assign:
                     while(True):
                         print("\nAre you sure you wish to fire this student? (y/n)\n")
                         confirmation = input()
+                        confirmation = confirmation.lower()
                         if(confirmation == "y" or confirmation == "yes"):
                             #TODO: Call function to fire student
                             print("\nStudent with ID " + tokens[1] + " has been fired.\n")
@@ -62,12 +73,17 @@ class assign:
                     print("\n****INVALID COMMAND****\n")
             except:
                 print("ERROR")
-        #Search Student
-        #Fire Student
-        #Display Students with 3 Strikes
-        #Add strike
-        pass
 def main():
-    assign.menu(1, 0)
+    if(len(sys.argv) >= 3):
+        try:
+            #TODO: Call function for user authentication and return id, -1 if invalid
+            if(True):
+                assign.menu(sys.argv[1], sys.argv[2])
+            else:
+                print("Invalid Login")
+        except:
+            print("\n****ERROR OCCURED WITH LOGIN****\n")
+    else:
+        print("\nInvalid Username or Password\n")
 if __name__ == '__main__':
         main()
