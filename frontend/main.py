@@ -1,4 +1,5 @@
 import sys
+import query.py as query
 
 class assign:
     def display():
