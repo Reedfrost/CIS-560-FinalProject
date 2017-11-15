@@ -6,9 +6,11 @@ class assign:
         print("\n*** THE FOLLOWING ARE THE POSSIBLE COMMANDS ***\n")
         print("> search <student id>")
         print("> offenders")
+        print("> allStudents")
         print("> strike <student id> <strike id>")
         print("> fire <student id>")
         print("> newStrike")
+        print("> newStudent")
         print("> quit")
         print(">(Not case sensitive)")
     def menu(id, query):
