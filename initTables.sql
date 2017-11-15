@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 ALTER SEQUENCE managers_id_seq RESTART WITH 1;
-INSERT INTO managers VALUES(DEFAULT, 'Jill');
+INSERT INTO managers VALUES(DEFAULT, 'Brad', 'beep', 'cheese');
 
 ALTER SEQUENCE students_id_seq RESTART WITH 1;
 INSERT INTO students VALUES(DEFAULT, 'Bob');

@@ -11,71 +11,74 @@ DROP TABLE IF EXISTS areas;
 DROP TABLE IF EXISTS days;
 
 CREATE TABLE students(
-id		serial PRIMARY KEY,
-name		text NOT NULL
+	id		serial PRIMARY KEY,
+	name	text NOT NULL
 );
 
 CREATE TABLE managers(
-id		serial PRIMARY KEY,
-name		text NOT NULL
+	id			serial PRIMARY KEY,
+	name		text NOT NULL,
+	username	text NOT NULL,
+	password	text NOT NULL,
+	CONSTRAINT username_uq UNIQUE(username)
 );
 
 CREATE TABLE writeUps(
-id		serial PRIMARY KEY,
-name		text NOT NULL,
-descr		text,
-CONSTRAINT names_uq2 UNIQUE (name)
+	id		serial PRIMARY KEY,
+	name	text NOT NULL,
+	descr	text,
+	CONSTRAINT names_uq2 UNIQUE (name)
 );
 
 CREATE TABLE offenders(
-sID		int NOT NULL,
-dTime		timestamp NOT NULL,
-CONSTRAINT sID_uq1 UNIQUE(sID),
-CONSTRAINT sID_fk1 FOREIGN KEY(sID) REFERENCES students(id)
+	sID		int NOT NULL,
+	dTime	timestamp NOT NULL,
+	CONSTRAINT sID_uq1 UNIQUE(sID),
+	CONSTRAINT sID_fk1 FOREIGN KEY(sID) REFERENCES students(id)
 );
 
 CREATE TABLE occurs(
 	mID		int NOT NULL,
-sID		int NOT NULL,
-wID		int NOT NULL,
-dTime		date NOT NULL,
-CONSTRAINT all_uq1 UNIQUE (mID, sID, wID, dTime),
-CONSTRAINT mID_fk1 FOREIGN KEY (mID) REFERENCES managers(id),
-CONSTRAINT sID_fk2 FOREIGN KEY (sID) REFERENCES students(id),
-CONSTRAINT wID_fk2 FOREIGN KEY (wID) REFERENCES writeUps(id)
+	sID		int NOT NULL,
+	wID		int NOT NULL,
+	dTime	date NOT NULL,
+	CONSTRAINT all_uq1 UNIQUE (mID, sID, wID, dTime),
+	CONSTRAINT mID_fk1 FOREIGN KEY (mID) REFERENCES managers(id),
+	CONSTRAINT sID_fk2 FOREIGN KEY (sID) REFERENCES students(id),
+	CONSTRAINT wID_fk2 FOREIGN KEY (wID) REFERENCES writeUps(id)
 );
 
 CREATE TABLE jobs(
-id     serial PRIMARY KEY,
-name   text NOT NULL,
-descr  text,
-CONSTRAINT names_uq3 UNIQUE(name)
+	id     serial PRIMARY KEY,
+	name   text NOT NULL,
+	descr  text,
+	CONSTRAINT names_uq3 UNIQUE(name)
 );
 
 CREATE TABLE areas(
-id     serial PRIMARY KEY,
-name   text NOT NULL,
-descr  text,
-CONSTRAINT names_uq4 UNIQUE(name)
+	id     serial PRIMARY KEY,
+	name   text NOT NULL,
+	descr  text,
+	CONSTRAINT names_uq4 UNIQUE(name)
 );
 
 CREATE TABLE days(
-id     serial PRIMARY KEY,
-Name   text NOT NULL,
-CONSTRAINT name_uq5 UNIQUE(name)
+	id     serial PRIMARY KEY,
+	Name   text NOT NULL,
+	CONSTRAINT name_uq5 UNIQUE(name)
 );
 
 CREATE TABLE works(
-sID    int NOT NULL,
-dID    int NOT NULL,
-dTime  time NOT NULL,
-aID    int NOT NULL,
-jID    int NOT NULL,
-CONSTRAINT all_uq2 UNIQUE(sID, dID, dTime),
-CONSTRAINT sID_fk3 FOREIGN KEY(sID) REFERENCES students(id),
-CONSTRAINT dID_fk1 FOREIGN KEY(dID) REFERENCES days(id),
-CONSTRAINT aID_fk1 FOREIGN KEY(aID) REFERENCES areas(id),
-CONSTRAINT jID_fk1 FOREIGN KEY(jID) REFERENCES jobs(id)
+	sID    int NOT NULL,
+	dID    int NOT NULL,
+	dTime  time NOT NULL,
+	aID    int NOT NULL,
+	jID    int NOT NULL,
+	CONSTRAINT all_uq2 UNIQUE(sID, dID, dTime),
+	CONSTRAINT sID_fk3 FOREIGN KEY(sID) REFERENCES students(id),
+	CONSTRAINT dID_fk1 FOREIGN KEY(dID) REFERENCES days(id),
+	CONSTRAINT aID_fk1 FOREIGN KEY(aID) REFERENCES areas(id),
+	CONSTRAINT jID_fk1 FOREIGN KEY(jID) REFERENCES jobs(id)
 );
 
 COMMIT;
