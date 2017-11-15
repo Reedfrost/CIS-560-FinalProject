@@ -7,6 +7,7 @@ class assign:
         print("> search <student id>")
         print("> offenders")
         print("> allStudents")
+        print("> viewStrikes")
         print("> strike <student id> <strike id>")
         print("> fire <student id>")
         print("> newStrike")
@@ -26,6 +27,12 @@ class assign:
                 if(tokens[0] == "offenders"):
                     print("\nSearching for Students with 3 Strikes...\n")
                     #TODO: Call function in query.py to print offenders
+                elif(tokens[0] == "allstudents"):
+                    print("\nListing all students...\n")
+                    #TODO: Call function to print all students and their IDs and their strikes
+                elif(tokens[0] == "viewstrikes"):
+                    print("\nListing all strikes...\n")
+                    #TODO: Call function to print all strikes and their IDs
                 elif(tokens[0] == "quit"):
                     print("\nGoodbye\n")
                     break
@@ -36,6 +43,11 @@ class assign:
                     description = input()
                     #TODO: Call function to create new Strike
                     print("\nCreating Strike: " + name + "...\n")
+                elif(tokens[0] == "newstudent"):
+                    print("\nEnter Name of New Student: \n")
+                    name = input()
+                    #TODO: Call function to add new student
+                    print("\nNew student " + name + " added\n")
                 elif(tokens[0] == "strike" and len(tokens) == 3):
                     print("\nGiving student with ID " + tokens[1] + " a new strike...\n")
                     #TODO: Call function to validate student ID
