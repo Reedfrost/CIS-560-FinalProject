@@ -96,7 +96,7 @@ CREATE OR REPLACE FUNCTION sanitize_text (rawWriteUp text) RETURNS text AS $$
 	DECLARE newString text;
 	BEGIN
 		newString := LOWER(rawWriteUp);
-		newString := regexp_replace(newString, '[^a-zA-Z0123456789]', ' ', 'g');
+		newString := regexp_replace(newString, '[^a-zA-Z0123456789]', '', 'g');
 		RETURN  newString;
 	END;
 $$ LANGUAGE plpgsql;
