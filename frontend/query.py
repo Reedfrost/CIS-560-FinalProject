@@ -4,16 +4,15 @@ from dbconn.py import connector
 
 class assign:
     def searchQuery(id, level):
-	    connection = connector.myConnection.cursor()
+        connection = connector.myConnection.cursor()
         if name == 'all':
 	        query = "SELECT * FROM student"
-            connection.execute(query)
+            #connection.execute(query)
         else:
-	        query = "SELECT {} FROM student".format(id)
+            query = "SELECT {} FROM student".format(id)
             try:
                 connection.execute(query)
             except:
                 print("This student doesn't exist {}".format(id))
-		
     def close():
-	    myConnection.close()
+	    connector.myConnection.close()

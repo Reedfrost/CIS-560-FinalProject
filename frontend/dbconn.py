@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2 as pgdb
 import sys
 
 class connector():
@@ -7,4 +7,4 @@ class connector():
     username = 'badonmap'
     password = ''
     database = 'badonmap'
-    myConnection = pgdb.connect(host=hostname, user=username, password=password, datbase=database)
+    myConnection = pgdb.connect(host=hostname, user=username, password=password, database=database)
