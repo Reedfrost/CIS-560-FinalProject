@@ -37,3 +37,33 @@ JOIN students s ON w.sid = s.id
 JOIN days d ON w.did = d.id
 JOIN areas a ON w.aid = a.id
 JOIN jobs j ON w.jid = j.id
+
+
+Get all write ups for employees that work at the same time and on the same day:
+SELECT m.name, s.name, wr.name, o.dTime, d.name, o.strt
+FROM (SELECT o.mid, w.sid, o.wid, o.dTime, w.did, w.strt
+      FROM occurs o
+      RIGHT JOIN (SELECT w1.sid, w1.did, w1.strt
+                  FROM works w1
+                  JOIN works w2 ON w1.did = w2.did AND w1.strt = w2.strt AND NOT w1.sid = w2.sid) w
+      ON o.sid = w.sid) o
+LEFT JOIN managers m ON o.mid = m.id
+LEFT JOIN students s ON o.sid = s.id
+LEFT JOIN writeUps wr ON o.wid = wr.id
+LEFT JOIN days d ON o.did = d.id
+ORDER BY o.dTime
+
+Get all write ups for employees that work at the same area on the same day:
+SELECT m.name, s.name, wr.name, o.dTime, d.name, a.name
+FROM (SELECT o.mid, w.sid, o.wid, o.dTime, w.did, w.aid
+      FROM occurs o
+      RIGHT JOIN (SELECT w1.sid, w1.did, w1.aid
+                  FROM works w1
+                  JOIN works w2 ON w1.aid = w2.aid AND w1.did = w2.did AND NOT w1.sid = w2.sid) w
+      ON o.sid = w.sid) o
+LEFT JOIN managers m ON o.mid = m.id
+LEFT JOIN students s ON o.sid = s.id
+LEFT JOIN writeUps wr ON o.wid = wr.id
+LEFT JOIN days d ON o.did = d.id
+LEFT JOIN areas a ON o.aid = a.id
+ORDER BY o.dTime
