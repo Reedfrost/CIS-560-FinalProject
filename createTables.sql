@@ -64,7 +64,7 @@ CREATE TABLE areas(
 
 CREATE TABLE days(
 	id     serial PRIMARY KEY,
-	Name   text NOT NULL,
+	name   text NOT NULL,
 	CONSTRAINT name_uq5 UNIQUE(name)
 );
 
