@@ -11,7 +11,27 @@ class Query():
             print("pass")
         except:
             print("fail")
-        
+    
+    #A function to validate a student ID's existance
+    def validateName(self, name):
+        query = "SELECT name FROM students WHERE id={}".format(name)
+        try:
+            self.cursor.execute(query)
+            return true
+        except:
+            print("This student doesn't exist")
+            return false
+    
+    #A function to validate a strike ID's existance
+    def validateStrike(self, id):
+        query = "SELECT name FROM writeUps WHERE id={}".formate(id)
+        try:
+            self.cursor.execture(query)
+            return true
+        except:
+            print("That strike doesn't exist")
+            return false
+    
     def searchQuery(self, name):
         if name == 'all':
             query = "SELECT * FROM students"
