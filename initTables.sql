@@ -79,14 +79,14 @@ INSERT INTO works VALUES(3, 3, '12:00 PM'::time, '03:00 PM'::time, 7, 4);
 INSERT INTO works VALUES(4, 2, '09:00 AM'::time, '12:00 PM'::time, 6, 3);
 INSERT INTO works VALUES(5, 5, '03:00 PM'::time, '06:00 PM'::time, 3, 2);
 INSERT INTO works VALUES(6, 6, '12:00 PM'::time, '03:00 PM'::time, 5, 1);
-INSERT INTO works VALUES(7, 4, '06:00 AM'::time, '09:00 AM'::time, 1, 3);
+INSERT INTO works VALUES(7, 4, '03:00 PM'::time, '06:00 PM'::time, 1, 3);
 INSERT INTO works VALUES(8, 2, '09:00 AM'::time, '12:00 PM'::time, 7, 4);
 INSERT INTO works VALUES(9, 1, '12:00 PM'::time, '03:00 PM'::time, 2, 1);
 INSERT INTO works VALUES(10, 6, '03:00 PM'::time, '06:00 PM'::time, 6, 3);
 INSERT INTO works VALUES(11, 3, '06:00 AM'::time, '09:00 AM'::time, 4, 2);
 INSERT INTO works VALUES(12, 5, '12:00 PM'::time, '03:00 PM'::time, 5, 3);
 INSERT INTO works VALUES(13, 1, '06:00 PM'::time, '09:00 AM'::time, 2, 1);
-INSERT INTO works VALUES(14, 2, '09:00 AM'::time, '12:00 PM'::time, 4, 2);
+INSERT INTO works VALUES(14, 2, '06:00 AM'::time, '9:00 AM'::time, 4, 2);
 INSERT INTO works VALUES(15, 3, '03:00 PM'::time, '06:00 PM'::time, 7, 4);
 
 COMMIT;
