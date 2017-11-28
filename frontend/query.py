@@ -1,25 +1,99 @@
 import psycopg2
 import sys
-from dbconn.py import connector
 
-class assign:
-    connection = connector.myConnection.cursor()
-    def searchQuery(id, level):
+class Query():
+    def __init__(self):
+        super().__init__()
+        conn_string = "host='postgresql.cs.ksu.edu' port=5432 dbname='badonmap' user='badonmap' password=''"
+        try:
+            conn = psycopg2.connect(conn_string)
+            self.cursor = conn.cursor()
+            print("pass")
+        except:
+            print("fail")
+        
+    def searchQuery(self, name):
         if name == 'all':
-	        query = "SELECT * FROM student"
-            #connection.execute(query)
+            query = "SELECT * FROM students"
+            self.printQuery(query)
         else:
-            query = "SELECT {} FROM student".format(id)
+            query = "SELECT name FROM students WHERE id={}".format(name)
             try:
-                connection.execute(query)
+                self.printQuery(query)
+                return True
             except:
-                print("This student doesn't exist {}".format(id))
-    def strike(student, strike):
-        query = "INSERT INTO writeUps VALUES"
-        connection.execute(query)
-    def newStudent(name):
-        query = "INSERT INTO students VALUES(1, {})".format(name)
-    def newStrike(description, strike):
-        query = "INSERT INTO writeUps VALUES(1, {}, {}, ?)".format(strike, description)
-    def close():
-	    connector.myConnection.close()
+                print("This student doesn't exist {}".format(name))
+                return False
+    def strike(self, mid, sid, wid, day, month, year):
+        try:
+            query = "INSERT INTO occurs VALUES({}, {}, {}, to_date('{} {} {}', 'DD Mon YYYY'))".format(mid, sid, wid, day, month, year)
+            self.cursor.execute(query)
+        except:
+            print("fail")
+        
+    def newStudent(self, name):
+        query = "INSERT INTO students VALUES(DEFAULT, '{}')".format(name)
+        self.cursor.execute(query)
+        
+    def newStrike(self, description, strike):
+        query = "INSERT INTO writeups VALUES(DEFAULT, '{}', '{}')".format(strike, description)
+        self.cursor.execute(query)
+        
+    def kramer_login(self, username, password):
+        query = "SELECT id FROM managers WHERE username='{}' AND password='{}'".format(username, password)
+        print(query)
+        try:
+            self.cursor.execute(query)
+            print("YOU IN")
+            data = self.cursor.fetchall()
+            return data[0]
+        except:
+            print("Fail")
+            return -1
+            
+    def viewStrikes(self):
+        query = "SELECT * FROM writeups"
+        self.printQuery(query)
+        
+    def list_offenders(self):
+        query = "SELECT * FROM offenders"
+        self.printQuery(query)
+        
+    def printQuery(self, query):
+        self.cursor.execute(query)
+        data = self.cursor.fetchall()
+        print(data)
+        
+    def fired(self, sid):
+        query = "DELETE FROM students WHERE id={}".format(sid)
+            
+    def close(self):
+        print("Closing connection")
+        self.cursor.close()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
