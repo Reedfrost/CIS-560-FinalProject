@@ -64,17 +64,18 @@ CREATE TABLE areas(
 
 CREATE TABLE days(
 	id     serial PRIMARY KEY,
-	Name   text NOT NULL,
+	name   text NOT NULL,
 	CONSTRAINT name_uq5 UNIQUE(name)
 );
 
 CREATE TABLE works(
 	sID    int NOT NULL,
 	dID    int NOT NULL,
-	dTime  time NOT NULL,
+	strt   time NOT NULL,
+	fnsh   time NOT NULL,
 	aID    int NOT NULL,
 	jID    int NOT NULL,
-	CONSTRAINT all_uq2 UNIQUE(sID, dID, dTime),
+	CONSTRAINT all_uq2 UNIQUE(sID, dID, strt, fnsh),
 	CONSTRAINT sID_fk3 FOREIGN KEY(sID) REFERENCES students(id),
 	CONSTRAINT dID_fk1 FOREIGN KEY(dID) REFERENCES days(id),
 	CONSTRAINT aID_fk1 FOREIGN KEY(aID) REFERENCES areas(id),

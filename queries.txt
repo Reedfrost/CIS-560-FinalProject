@@ -1,0 +1,39 @@
+Replace ids with names in the occurs table:
+SELECT m.name, s.name, w.name, o.dTime
+FROM occurs o
+JOIN managers m ON o.mid = m.id
+JOIN students s ON o.sid = s.id
+JOIN writeUps w ON o.wid = w.id
+ORDER BY o.dTime
+
+Number of times managers have used certain types of write ups:
+SELECT m.name, w.name, COUNT(*)
+FROM occurs o
+JOIN managers m ON o.mid = m.id
+JOIN writeUps w ON o.wid = w.id
+GROUP BY m.name, w.name
+ORDER BY w.name
+
+Number of times mangers have writen up certain students:
+SELECT m.name, s.name, COUNT(*)
+FROM occurs o
+JOIN managers m ON o.mid = m.id
+JOIN students s ON o.sid = s.id
+GROUP BY m.name, s.name
+ORDER BY s.name
+
+Number of times students have received certain types of write ups:
+SELECT s.name, w.name, COUNT(*)
+FROM occurs o
+JOIN students s ON o.sid = s.id
+JOIN writeUps w ON o.wid = w.id
+GROUP BY s.name, w.name
+ORDER BY s.name
+
+Replace ids with names in the works table:
+SELECT s.name, d.name, w.strt, w.fnsh, a.name, j.name
+FROM works w
+JOIN students s ON w.sid = s.id
+JOIN days d ON w.did = d.id
+JOIN areas a ON w.aid = a.id
+JOIN jobs j ON w.jid = j.id
