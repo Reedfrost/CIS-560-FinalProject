@@ -30,16 +30,13 @@ class assign:
                 if(tokens[0] == "offenders"):
                     print("\nSearching for Students with 3 Strikes...\n")
                     query.list_offenders()
-                    # TODO: Call function in query.py to print offenders
                     
                 elif(tokens[0] == "allstudents"):
                     print("\nListing all students...\n")
-                    # TODO: Call function to print all students and their IDs and their strikes
                     query.searchQuery("all")
                 
                 elif(tokens[0] == "viewstrikes"):
                     print("\nListing all strikes...\n")
-                    # TODO: Call function to print all strikes and their IDs
                     query.viewStrikes()
                 
                 elif(tokens[0] == "quit"):
@@ -53,7 +50,6 @@ class assign:
                     print("\nEnter description: \n")
                     description = input()
                     query.newStrike(description, name)
-                    # TODO: Call function to create new Strike
                     print("\nCreating Strike: " + name + "...\n")
                 
                 elif(tokens[0] == "newstudent"):
@@ -80,16 +76,13 @@ class assign:
                     query.strike(id[0], student, strike, day, month, year)
                     
                     print("\nGiving student with ID " + student + " a new strike...\n")
-                    # TODO: Call function to validate student ID
-                    if(False):
-                        print("\nInvalid Student ID\n")
+                    if(!query.validateStudent(student)):
                         continue
-                    # TODO: call function to validate strike ID
-                    if(False):
-                        print("\nInvalid Strike ID\n")
+                    elif(!query.validateStrike(strike)):
                         continue
-                    # TODO: if all good call function give student the new strike
-                
+                    else:
+                        query.strike(main.id, student, strike, day, moonth, year)
+                                    
                 elif(tokens[0] == "search" and len(tokens) == 2):
                     print("\nSearching for student with ID " + tokens[1] + "...\n")
                     # TODO: Call function to validate student ID
