@@ -77,3 +77,13 @@ JOIN days d ON w.did = d.id
 JOIN areas a ON w.aid = a.id
 JOIN jobs j ON w.jid = j.id
 ORDER BY w.did, w.strt;
+
+-- Get all the students with a certain number of strikes
+SELECT s.name as student
+FROM (
+    SELECT o.sid, COUNT(*) as count
+    FROM occurs o
+    GROUP BY o.sid
+) c
+JOIN students s ON c.sid = s.id
+WHERE c.count = {}
