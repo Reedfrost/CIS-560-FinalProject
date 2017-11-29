@@ -1,4 +1,4 @@
-Replace ids with names in the occurs table:
+-- Replace ids with names in the occurs table to make it more readable
 SELECT m.name as manager, s.name as student, w.name as write_up, o.dTime as assign_time
 FROM occurs o
 JOIN managers m ON o.mid = m.id
@@ -6,7 +6,7 @@ JOIN students s ON o.sid = s.id
 JOIN writeUps w ON o.wid = w.id
 ORDER BY o.dTime;
 
-Number of times managers have used certain types of write ups:
+-- Number of times managers have used certain types of write ups
 SELECT m.name as manager, w.name as write_up, COUNT(*)
 FROM occurs o
 JOIN managers m ON o.mid = m.id
@@ -30,7 +30,7 @@ JOIN writeUps w ON o.wid = w.id
 GROUP BY s.name, w.name
 ORDER BY s.name;
 
--- Replace ids with names to make more readable
+-- Replace ids with names in the works table to make it more readable
 SELECT s.name as student, d.name as day, w.strt as start, w.fnsh as finish, a.name as area, j.name as job
 FROM works w
 JOIN students s ON w.sid = s.id
@@ -67,3 +67,13 @@ LEFT JOIN days d ON o.did = d.id
 LEFT JOIN areas a ON o.aid = a.id
 GROUP BY s.name, d.name, a.name, o.strt
 ORDER BY d.name, a.name, o.strt;
+
+-- Get the schedules of students who have been put on the offenders table
+SELECT s.name as student, d.name as day, w.strt as start, w.fnsh as finish, a.name as area, j.name as job, o.dTime as strike_date
+FROM works w
+JOIN offenders o ON w.sid = o.sid
+JOIN students s ON w.sid = s.id
+JOIN days d ON w.did = d.id
+JOIN areas a ON w.aid = a.id
+JOIN jobs j ON w.jid = j.id
+ORDER BY w.did, w.strt;
