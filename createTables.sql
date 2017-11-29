@@ -136,7 +136,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION check_strikes () RETURNS trigger AS $$
 	BEGIN
-		IF (count_strikes(NEW.sID) > 2) THEN
+		IF (count_strikes(NEW.sID) = 3) THEN
 			INSERT INTO offenders VALUES (NEW.sID, NEW.dTime);
 		END IF;
 		RETURN NEW;
