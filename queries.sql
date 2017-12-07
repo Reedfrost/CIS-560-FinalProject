@@ -98,7 +98,7 @@ WHERE id = {};
 
 -- Query #3:
 -- Find the IDs of students with a specific first name
-SELECT id
+SELECT id, name
 FROM students
 WHERE LOWER('{}') like get_word(name, 1);
 
