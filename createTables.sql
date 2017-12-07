@@ -32,7 +32,7 @@ CREATE TABLE writeUps(
 
 CREATE TABLE offenders(
 	sID		int NOT NULL,
-	dTime	timestamp NOT NULL,
+	day		date NOT NULL,
 	CONSTRAINT sID_uq1 UNIQUE(sID),
 	CONSTRAINT sID_fk1 FOREIGN KEY(sID) REFERENCES students(id) ON DELETE CASCADE
 );
@@ -41,8 +41,8 @@ CREATE TABLE occurs(
 	mID		int NOT NULL,
 	sID		int NOT NULL,
 	wID		int NOT NULL,
-	dTime	date NOT NULL,
-	CONSTRAINT all_uq1 UNIQUE (mID, sID, wID, dTime),
+	day		date NOT NULL,
+	CONSTRAINT all_uq1 UNIQUE (mID, sID, wID, day),
 	CONSTRAINT mID_fk1 FOREIGN KEY (mID) REFERENCES managers(id),
 	CONSTRAINT sID_fk2 FOREIGN KEY (sID) REFERENCES students(id) ON DELETE CASCADE,
 	CONSTRAINT wID_fk2 FOREIGN KEY (wID) REFERENCES writeUps(id)
@@ -137,7 +137,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION check_strikes () RETURNS trigger AS $$
 	BEGIN
 		IF (count_strikes(NEW.sID) = 3) THEN
-			INSERT INTO offenders VALUES (NEW.sID, NEW.dTime);
+			INSERT INTO offenders VALUES (NEW.sID, NEW.day);
 		END IF;
 		RETURN NEW;
 	END;
